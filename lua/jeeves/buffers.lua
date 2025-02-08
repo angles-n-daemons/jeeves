@@ -22,10 +22,9 @@ function Buffers:highlight_range(buf, range)
 	local end_line = range[2]
 	local opts = {
 		end_line = end_line, -- extmark will highlight from start_line to end_line-1
-		hl_group = "search", -- default highlight group; customize as desired
+		hl_group = "todo",
 	}
 	local extmark_id = vim.api.nvim_buf_set_extmark(buf, self.ns, start_line, 0, opts)
-	print('setting extmark', extmark_id)
 	return extmark_id
 end
 
@@ -78,7 +77,6 @@ function Buffers:get_extmarks_at_cursor()
 		end
 	end
 
-	vim.print(found_marks)
 	return found_marks
 end
 
