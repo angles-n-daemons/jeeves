@@ -95,6 +95,15 @@ function Store:get_all()
 	for _, sel in pairs(self.selections) do
 		table.insert(all, sel)
 	end
+
+	-- Returns elements sorted by filename and then by range.
+	table.sort(all, function(a, b)
+		if a.filename == b.filename then
+			return a.range[1] < b.range[1]
+		end
+		return a.filename < b.filename
+	end)
+
 	return all
 end
 
