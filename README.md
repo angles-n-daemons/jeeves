@@ -15,14 +15,14 @@ return {
   keys = {
     {
       mode = { 'v' },
-      'M',
+      'M', -- hit M in visual mode to add the selection to your context.
       function()
         require('jeeves').add_selection()
       end,
     },
     {
       mode = { 'n' },
-      'M',
+      'M', -- hit M in normal mode to remove the selection under your cursor.
       function()
         require('jeeves').remove_selections_under_cursor()
       end,
