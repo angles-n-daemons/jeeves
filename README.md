@@ -2,6 +2,9 @@
 
 jeeves is a small library for managing context with [CopilotChat](https://github.com/CopilotC-Nvim/CopilotChat.nvim).
 
+
+[![asciicast](https://asciinema.org/a/9VQ8OdALcuyfXKqBohqXswsKk.svg)](https://asciinema.org/a/9VQ8OdALcuyfXKqBohqXswsKk)
+
 # installation
 
 to install jeeves, use lazy or an equivalent package manager to install the package.
