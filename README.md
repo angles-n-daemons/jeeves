@@ -9,7 +9,7 @@ jeeves is a small library for managing context with [CopilotChat](https://github
 
 to install jeeves, use lazy or an equivalent package manager to install the package.
 
-```
+```lua
 return {
   'angles-n-daemons/jeeves',
   keys = {
@@ -39,7 +39,7 @@ return {
 
 separately, modify your CopilotChat configuration with the new context:
 
-```
+```lua
 return {
   'CopilotC-Nvim/CopilotChat.nvim',
   ...
