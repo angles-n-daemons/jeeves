@@ -147,7 +147,11 @@ end
 -- @param id The unique id.
 -- @param new_range A table {start_line, end_line} with the new range.
 -- @return true on success, or false and an error message.
-function Store:update_range_by_id(id, new_range)
+function Store:update_range_by_extmark(extmark_id, new_range)
+	local id = self.extmark_to_id[extmark_id]
+	if not id then
+		return false, "Extmark not found"
+	end
 	local selection = self.selections[id]
 	if not selection then
 		return false, "Selection not found"
@@ -181,6 +185,30 @@ function Store:clear_extmark_by_extmark(extmark)
 		return false, "Selection not found for extmark"
 	end
 	return self:clear_extmark_by_id(id)
+end
+
+--- Updates the extmark of a selection by its id.
+-- @param id The id of the selection to update.
+-- @param new_extmark The new extmark to set for the selection.
+-- @return boolean, string Returns true if the update is successful, or false and an error message if the selection is not found.
+function Store:update_extmark_by_id(id, new_extmark)
+	local selection = self.selections[id]
+	if not selection then
+		return false, "Selection not found"
+	end
+
+	-- Remove the old extmark to id mapping
+	if selection.extmark then
+		self.extmark_to_id[selection.extmark] = nil
+	end
+
+	-- Update the extmark
+	selection.extmark = new_extmark
+
+	-- Add the new extmark to id mapping
+	self.extmark_to_id[new_extmark] = id
+
+	return true
 end
 
 --- Clears all selections and resets the store.

@@ -51,4 +51,22 @@ M.clear = function()
 	M.store:clear()
 end
 
+-- Handles autocmd for buffer open.
+M.buffer_open = function()
+	local selections = M.store:get_by_filename(vim.api.nvim_buf_get_name(0))
+	for _, selection in ipairs(selections) do
+		local extmark_id = M.buffers:highlight_range(0, selection.range)
+		M.store:update_extmark_by_id(selection.id, extmark_id)
+	end
+end
+
+-- Handles autocmd for buffer close.
+M.buffer_close = function()
+	local extmarks = M.buffers:get_extmarks_in_buffer()
+	for _, mark in ipairs(extmarks) do
+		M.store:update_range_by_extmark(mark[1], { mark[2] + 1, mark[4].end_row })
+		M.store:clear_extmark_by_extmark(mark[1])
+	end
+end
+
 return M
